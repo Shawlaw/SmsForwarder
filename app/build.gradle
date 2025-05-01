@@ -344,7 +344,7 @@ dependencies {
     //权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.github.getActivity:XXPermissions:20.0'
     //语种切换框架：https://github.com/getActivity/MultiLanguages
-    implementation 'com.github.getActivity:MultiLanguages:b47f7be' //9.3
+    implementation 'com.github.getActivity:MultiLanguages:9.5' //9.3
 
     // https://jakartaee.github.io/mail-api/Android
     def mail_version = '2.0.1'
