@@ -1,10 +1,14 @@
 package com.idormy.sms.forwarder.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
+import android.os.PowerManager
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.google.gson.Gson
+import com.idormy.sms.forwarder.App
 import com.idormy.sms.forwarder.R
 import com.idormy.sms.forwarder.core.Core
 import com.idormy.sms.forwarder.database.entity.MsgAndLogs
@@ -97,6 +101,19 @@ object SendUtils {
                 updateLogs(logId, 0, getString(R.string.sender_disabled))
                 senderLogic(0, msgInfo, rule, senderIndex, msgId)
                 return
+            }
+            if (rule.onlySendWhenScreenOff == Rule.TRUE_ONLY_SEND_WHEN_SCREEN_OFF) {
+                val isScreenOn = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    App.context.getSystemService(PowerManager::class.java).isInteractive
+                } else {
+                    (App.context.getSystemService(Context.POWER_SERVICE) as PowerManager).isScreenOn
+                }
+                if (isScreenOn) {
+                    Log.d(TAG, "sender = $sender , 屏幕亮屏中, 无需转发")
+                    updateLogs(logId, 0, getString(R.string.dont_send_because_screen_on))
+                    senderLogic(0, msgInfo, rule, senderIndex, msgId)
+                    return
+                }
             }
             //免打扰(禁用转发)日期段
             Log.d(TAG, "silentDayOfWeek = ${rule.silentDayOfWeek}")

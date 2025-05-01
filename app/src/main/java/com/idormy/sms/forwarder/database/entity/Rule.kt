@@ -55,10 +55,15 @@ data class Rule(
     @ColumnInfo(name = "silent_period_start", defaultValue = "0") var silentPeriodStart: Int = 0,
     @ColumnInfo(name = "silent_period_end", defaultValue = "0") var silentPeriodEnd: Int = 0,
     @ColumnInfo(name = "silent_day_of_week", defaultValue = "") var silentDayOfWeek: String = "",
+    @ColumnInfo(name = "only_send_when_screen_off", defaultValue = "$DEFAULT_ONLY_SEND_WHEN_SCREEN_OFF") var onlySendWhenScreenOff: Int = DEFAULT_ONLY_SEND_WHEN_SCREEN_OFF,
 ) : Parcelable {
 
     companion object {
         val TAG: String = Rule::class.java.simpleName
+
+        const val TRUE_ONLY_SEND_WHEN_SCREEN_OFF = 1
+        const val FALSE_ONLY_SEND_WHEN_SCREEN_OFF = 0
+        const val DEFAULT_ONLY_SEND_WHEN_SCREEN_OFF = FALSE_ONLY_SEND_WHEN_SCREEN_OFF
 
         fun getRuleMatch(type: String?, filed: String?, check: String?, value: String?, simSlot: String?, senderList: List<Sender>? = null): String {
             val blank = if (App.isNeedSpaceBetweenWords) " " else ""

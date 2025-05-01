@@ -216,6 +216,7 @@
     <string name="match_value">匹配的值</string>
     <string name="match_value_tips">如需匹配多个关键词，请用 正则匹配 或 多重匹配</string>
     <string name="switch_rule_status">启用该条转发规则</string>
+    <string name="switch_rule_only_send_when_screen_off">仅当当前设备屏幕关闭时才执行转发</string>
     <string name="invalid_match_value">匹配的值不可为空</string>
     <string name="invalid_call_type">通话类型不正确，只能填写1到6的任意一个数字</string>
     <string name="mon">周一</string>
@@ -900,6 +901,7 @@
     <string name="sm4_key_tips">客户端/服务端交互采用SM4加解密</string>
 
     <string name="sender_disabled">发送通道已禁用</string>
+    <string name="dont_send_because_screen_on">屏幕亮屏中，无需转发</string>
     <string name="unknown_sender">未知发送通道</string>
     <string name="network_type">网络类型</string>
     <string name="loading_app_list">努力加载应用列表中，请稍候…</string>

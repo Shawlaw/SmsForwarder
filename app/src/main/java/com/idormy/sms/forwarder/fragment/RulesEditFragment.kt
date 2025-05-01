@@ -226,6 +226,7 @@ class RulesEditFragment : BaseFragment<FragmentRulesEditBinding?>(), View.OnClic
         binding!!.btnSave.setOnClickListener(this)
 
         binding!!.sbStatus.setOnCheckedChangeListener(this)
+        binding!!.sbOnlySendWhenScreenOff.setOnCheckedChangeListener(this)
         binding!!.sbSmsTemplate.setOnCheckedChangeListener(this)
         binding!!.sbRegexReplace.setOnCheckedChangeListener(this)
 
@@ -572,6 +573,7 @@ class RulesEditFragment : BaseFragment<FragmentRulesEditBinding?>(), View.OnClic
                 binding!!.sbRegexReplace.isChecked = !TextUtils.isEmpty(rule.regexReplace.trim())
                 binding!!.etRegexReplace.setText(rule.regexReplace.trim())
                 binding!!.sbStatus.isChecked = rule.statusChecked
+                binding!!.sbOnlySendWhenScreenOff.isChecked = (rule.onlySendWhenScreenOff == Rule.TRUE_ONLY_SEND_WHEN_SCREEN_OFF)
                 silentPeriodStart = rule.silentPeriodStart
                 silentPeriodEnd = rule.silentPeriodEnd
                 //初始化发送通道下拉框
@@ -666,6 +668,7 @@ class RulesEditFragment : BaseFragment<FragmentRulesEditBinding?>(), View.OnClic
             else -> CHECK_SIM_SLOT_ALL
         }
         val status = if (binding!!.sbStatus.isChecked) STATUS_ON else STATUS_OFF
+        val onlySendWhenScreenOff = if (binding!!.sbOnlySendWhenScreenOff.isChecked) Rule.TRUE_ONLY_SEND_WHEN_SCREEN_OFF else Rule.FALSE_ONLY_SEND_WHEN_SCREEN_OFF
 
         val map = mapOf(
             Calendar.SUNDAY to binding!!.sun,
@@ -697,6 +700,7 @@ class RulesEditFragment : BaseFragment<FragmentRulesEditBinding?>(), View.OnClic
             silentPeriodStart,
             silentPeriodEnd,
             silentDayOfWeek,
+            onlySendWhenScreenOff
         )
     }
 

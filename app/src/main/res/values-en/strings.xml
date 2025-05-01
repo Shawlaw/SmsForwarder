@@ -215,6 +215,7 @@
     <string name="match_value">Value</string>
     <string name="match_value_tips">If you need to match multiple keywords, please use regular or multiple match</string>
     <string name="switch_rule_status">Enable This Forwarding Rule</string>
+    <string name="switch_rule_only_send_when_screen_off">Only do sending when the device\'s screen is off</string>
     <string name="invalid_match_value">The matched value cannot be null</string>
     <string name="invalid_call_type">The call type is incorrect, you can only enter any number from 1 to 6.</string>
     <string name="mon">MON</string>
@@ -899,6 +900,7 @@
     <string name="sm4_key_tips">Client or server interaction messages are all encrypted and decrypted using SM4</string>
 
     <string name="sender_disabled">Sender is disabled</string>
+    <string name="dont_send_because_screen_on">Screen is on, don\'t send</string>
     <string name="unknown_sender">Unknown sender</string>
     <string name="network_type">Network Type</string>
     <string name="loading_app_list">Loading the list of apps, please wait…</string>
