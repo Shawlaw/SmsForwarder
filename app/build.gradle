@@ -2,6 +2,8 @@
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
+import java.nio.charset.StandardCharsets
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -16,7 +18,7 @@ plugins {
 def keyProps = new Properties()
 def keyPropsFile = rootProject.file('keystore/keystore.properties')
 if (keyPropsFile.exists()) {
-    keyProps.load(new FileInputStream(keyPropsFile))
+    keyProps.load(new InputStreamReader(new FileInputStream(keyPropsFile), StandardCharsets.UTF_8))
 }
 
 //打包时，记得设置true启用
@@ -133,29 +135,13 @@ android {
             debuggable true
             jniDebuggable true
             // 移除无用的资源
-            shrinkResources true
+            shrinkResources false
             // 代码混淆开关
-            minifyEnabled true
+            minifyEnabled false
             // 混淆配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            if (isNeedPackage.toBoolean()) {
-                signingConfig signingConfigs.release
-                if (file('local.properties').exists()) {
-                    Properties properties = new Properties()
-                    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-                    def appID = properties.getProperty("APP_ID_UMENG")
-                    if (appID != null) {
-                        buildConfigField "String", "APP_ID_UMENG", appID
-                    } else {
-                        buildConfigField "String", "APP_ID_UMENG", '"60254fc7425ec25f10f4293e"'
-                    }
-                } else {
-                    buildConfigField "String", "APP_ID_UMENG", '"60254fc7425ec25f10f4293e"'
-                }
-            } else {
-                signingConfig signingConfigs.debug
-                buildConfigField "String", "APP_ID_UMENG", '"60254fc7425ec25f10f4293e"'
-            }
+            signingConfig signingConfigs.debug
+            buildConfigField "String", "APP_ID_UMENG", '"60254fc7425ec25f10f4293e"'
         }
     }
 
